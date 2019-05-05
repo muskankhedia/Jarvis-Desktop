@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // eslint-disable-next-line no-undef
 const app = angular.module('jarvis-desktop', [ 'ngRoute', 'ngAnimate', 'ngStorage', ]),
 	URL = 'http://127.0.0.1:3000',
@@ -173,6 +174,8 @@ app.controller('area-controller', function ($scope, $http, responseService, $rec
 				console.warn(res);
 
 				// $scope types for handling different response types
+				$scope.message = message;
+				console.log(message)
 				$scope.showWeatherScope = false;
 				$scope.showQueryScope = false;
 				$scope.showVideoScope = false;
@@ -269,11 +272,22 @@ app.controller('weather-view-controller', function ($scope, responseService) {
 	}
 	$scope.weatherData = serviceStore;
 
+	$scope.onloadFun = function() {
+
+		speak($scope.message, { amplitude: 100, wordgap: 2, pitch: 40, speed: 150, })
+
+	}
+
 });
 
 app.controller('query-view-controller', function ($scope, responseService) {
 
 	$scope.queryData = responseService.getStore();
+	$scope.onloadFun = function() {
+
+		speak($scope.message, { amplitude: 100, wordgap: 2, pitch: 40, speed: 150, })
+
+	}
 
 });
 
@@ -288,6 +302,12 @@ app.controller('video-view-controller', [ '$scope', '$sce', function ($scope, $s
 
 	}
 
+	$scope.onloadFun = function() {
+
+		speak($scope.message, { amplitude: 100, wordgap: 2, pitch: 40, speed: 150, })
+
+	}
+
 }, ]);
 
 app.controller('medicine-view-controller', function ($scope, responseService) {
@@ -296,10 +316,22 @@ app.controller('medicine-view-controller', function ($scope, responseService) {
 	$scope.messageInfo = serviceStore.message;
 	$scope.messageResult = serviceStore.result;
 
+	$scope.onloadFun = function() {
+
+		speak($scope.message, { amplitude: 100, wordgap: 2, pitch: 40, speed: 150, })
+
+	}
+
 });
 
 app.controller('recent-usage-controller', function ($scope, $recentlyUsed) {
 
 	$scope.recentUsageArray = $recentlyUsed.getUsageStore();
+
+	$scope.onloadFun = function() {
+
+		speak($scope.message, { amplitude: 100, wordgap: 2, pitch: 40, speed: 150, })
+
+	}
 
 });

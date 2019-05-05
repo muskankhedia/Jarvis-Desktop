@@ -1,5 +1,5 @@
 <!-- Handles query requests -->
-<div class="outer-layer-response" data-ng-controller="query-view-controller" style>
+<div class="outer-layer-response" data-ng-controller="query-view-controller" data-ng-init="onloadFun()">
     <div id="queried-data" data-ng-if="queryData.length !== 0 ">
         <br>
         <div data-ng-repeat="objectQuery in queryData" >
@@ -12,5 +12,6 @@
                 </div>
             </div>
         </div>
+        <div id="audio"></div>
     </div>
 </div>

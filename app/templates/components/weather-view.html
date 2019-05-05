@@ -1,5 +1,5 @@
 <!-- Handles weather requests -->
-<div class="weather-view-class" data-ng-controller="weather-view-controller">
+<div class="weather-view-class" data-ng-controller="weather-view-controller" data-ng-init="onloadFun()">
     <div class="outer-layer-response">
         <!-- upper region -->
         <div data-ng-class="tempTag">
@@ -26,5 +26,6 @@
                 <strong>Dew Point :</strong> {{weatherData.dew_point}}
             </span> <br>
         </div>
+        <div id="audio"></div>
     </div>
 </div>

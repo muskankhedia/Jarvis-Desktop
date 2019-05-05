@@ -1,4 +1,4 @@
-<div class="outer-layer-response" data-ng-controller="medicine-view-controller">
+<div class="outer-layer-response" data-ng-controller="medicine-view-controller" data-ng-init="onloadFun()">
     <div class="medicine-view-main">
         <!-- head -->
         <div class="medicine-health-main-head">
@@ -10,5 +10,6 @@
         <div class="medicine-health-main-body">
             {{messageResult}}
         </div>
+        <div id="audio"></div>
     </div>
 </div>
