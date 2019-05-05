@@ -175,6 +175,7 @@ app.controller('area-controller', function ($scope, $http, responseService, $rec
 
 				// $scope types for handling different response types
 				$scope.message = message;
+				// eslint-disable-next-line no-console
 				console.log(message)
 				$scope.showWeatherScope = false;
 				$scope.showQueryScope = false;
