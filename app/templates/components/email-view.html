@@ -1,21 +1,7 @@
 <!-- Handles email requests -->
 <div class="outer-layer-response" data-ng-controller="email-controller">
-    <!-- <div id="queried-data" data-ng-if="queryData.length !== 0">
-        <br>
-        <div data-ng-repeat="objectQuery in queryData">
-            <div class="card">
-                <div class="card-body">
-                    <p class="meaning">{{$index + 1}}. {{objectQuery.meaning}}</p>
-                    <p class="example"><i>Example: {{objectQuery.example}}</i></p>
-                    <div data-ng-repeat="sub in objectQuery.submeaning" id="submean">
-                        <p class="submeaning">{{$parent.$index + 1}}.{{$index+1}}. {{sub.Smean}}</p>
-                        <p class="subexample"><i>Example: {{sub.Subexample}}</i></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div class="container">
+
+    <div class="container" id = "email-form">
         <form>
             <br />
             <div class="form-group">
@@ -54,4 +40,11 @@
     
         </form>
     </div>
+
+    <div id="email-message-outer-layer">
+        <p id="email-message">
+            {{message}}
+        </p>
+    </div>
+
 </div>

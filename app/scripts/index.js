@@ -345,9 +345,8 @@ app.controller('general-controller', function ($scope, responseService) {
 
 });
 
-app.controller('email-controller', function ($scope) {
+app.controller('email-controller', function ($scope, $http) {
 
-	$scope.formData = {};
 	$scope.sendMail = function() {
 
 		let mailSender = $scope.formData.Sender,
@@ -381,7 +380,6 @@ app.controller('email-controller', function ($scope) {
 
 		console.log(data);
 
-		// eslint-disable-next-line no-undef
 		$http({
 			url    : URL + '/email',
 			method : 'POST',
@@ -389,32 +387,37 @@ app.controller('email-controller', function ($scope) {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
 			data: data,
-		})
-		// }).then((resp) => {
+		}).then((resp) => {
 
-		// 	let res = resp.data,
-		// 		message = res[ 'message' ],
-		// 		status = res[ 'status' ],
+			let res = resp.data,
+				message = res[ 'message' ],
+				status = res[ 'status' ]
 
-		// 	// if ((status === 'success' || status) && message === 'Mail sent Successfully') {
+			if ((status === 'success' || status) && message === 'Mail sent Successfully') {
 
-		// 	// 	$scope.message = message;
+				$scope.message = message;
+				document.getElementById("email-form").style.display = 'none';
+				document.getElementById("email-message").style.display = 'block';
+				console.log($scope.message)
 
-		// 	// } else {
+			} else {
 
-		// 	// 	$scope.message = '[JARVIS] error fetching from service.';
+				$scope.message = '[JARVIS] error fetching from service.';
+				document.getElementById("email-form").style.display = 'none';
+				document.getElementById("email-message").style.display = 'block';
 
-		// 	// }
+			}
 
-		// }).catch((e) => {
+		}).catch((e) => {
 
-		// 	throw e;
+			throw e;
 
-		// });
+		});
 		$scope.formData.To = '';
 		$scope.formData.Subject = '';
 		$scope.formData.Body = '';
 
 	};
+	$scope.formData = {};
 
 });
