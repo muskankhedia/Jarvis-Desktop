@@ -181,6 +181,7 @@ app.controller('area-controller', function ($scope, $http, responseService, $rec
 				$scope.showImageScope = false;
 				$scope.showGeneralScope = false;
 				$scope.showMeaningScope = false;
+				$scope.showEmailScope = false;
 
 				// response checks
 				if (status && message.includes('current weather conditions')) {
@@ -207,6 +208,11 @@ app.controller('area-controller', function ($scope, $http, responseService, $rec
 				} else if (status && message.includes('meaning of the searched word')) {
 
 					$scope.showMeaningScope = true;
+					responseService.updateServiceStore(result, res);
+
+				} else if (status && message.includes('Enter Mail details')) {
+
+					$scope.showEmailScope = true;
 					responseService.updateServiceStore(result, res);
 
 				} else if (
@@ -239,6 +245,7 @@ app.controller('area-controller', function ($scope, $http, responseService, $rec
 			$scope.showImageScope = false;
 			$scope.showGeneralScope = false;
 			$scope.showMeaningScope = false;
+			$scope.showEmailScope = false;
 
 			// re-initialize services
 			responseService.updateServiceStore(null, null);
@@ -338,3 +345,76 @@ app.controller('general-controller', function ($scope, responseService) {
 
 });
 
+app.controller('email-controller', function ($scope) {
+
+	$scope.formData = {};
+	$scope.sendMail = function() {
+
+		let mailSender = $scope.formData.Sender,
+			mailTo = $scope.formData.To,
+			mailCc = $scope.formData.CC,
+			mailBcc = $scope.formData.BCC,
+			mailSubject = $scope.formData.Subject,
+			mailBody = $scope.formData.Body,
+
+			mailObj = {
+				sender : '',
+				to     : '',
+				cc     : '',
+				bcc    : '',
+				subject: '',
+				body   : '',
+			},
+			data = null;
+
+		mailObj.sender = mailSender;
+		mailObj.to = mailTo;
+		mailObj.cc = mailCc;
+		mailObj.bcc = mailBcc;
+		mailObj.subject = mailSubject;
+		mailObj.body = mailBody;
+
+		console.log(mailObj);
+
+		data = 'sender=' + mailObj.sender + '&to=' + mailObj.to + '&subject=' + mailObj.subject + '&body=' + mailObj.body +
+			'&cc=' + mailObj.cc + '&body=' + mailObj.bcc;
+
+		console.log(data);
+
+		// eslint-disable-next-line no-undef
+		$http({
+			url    : URL + '/email',
+			method : 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			data: data,
+		})
+		// }).then((resp) => {
+
+		// 	let res = resp.data,
+		// 		message = res[ 'message' ],
+		// 		status = res[ 'status' ],
+
+		// 	// if ((status === 'success' || status) && message === 'Mail sent Successfully') {
+
+		// 	// 	$scope.message = message;
+
+		// 	// } else {
+
+		// 	// 	$scope.message = '[JARVIS] error fetching from service.';
+
+		// 	// }
+
+		// }).catch((e) => {
+
+		// 	throw e;
+
+		// });
+		$scope.formData.To = '';
+		$scope.formData.Subject = '';
+		$scope.formData.Body = '';
+
+	};
+
+});
