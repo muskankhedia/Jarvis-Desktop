@@ -373,12 +373,8 @@ app.controller('email-controller', function ($scope, $http) {
 		mailObj.subject = mailSubject;
 		mailObj.body = mailBody;
 
-		console.log(mailObj);
-
 		data = 'sender=' + mailObj.sender + '&to=' + mailObj.to + '&subject=' + mailObj.subject + '&body=' + mailObj.body +
 			'&cc=' + mailObj.cc + '&body=' + mailObj.bcc;
-
-		console.log(data);
 
 		$http({
 			url    : URL + '/email',
@@ -398,7 +394,6 @@ app.controller('email-controller', function ($scope, $http) {
 				$scope.message = message;
 				document.getElementById("email-form").style.display = 'none';
 				document.getElementById("email-message").style.display = 'block';
-				console.log($scope.message)
 
 			} else {
 
