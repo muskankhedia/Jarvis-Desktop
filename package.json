@@ -32,6 +32,6 @@
     "eslint": "5.16.0"
   },
   "dependencies": {
-    "node-json-db": "^0.11.0"
+    "node-json-db": "^1.0.0"
   }
 }
